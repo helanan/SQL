@@ -56,3 +56,46 @@ SELECT first_name
 FROM teachers
 WHERE first_name ILIKE 'sam%';
 -- returns 2 results
+
+--Combined Operators
+SELECT *
+FROM teachers
+WHERE school = 'F.D. Roosevelt HS'
+	AND (salary < 38000 OR salary > 40000);
+    
+--All combined
+SELECT first_name, last_name, school, hire_date, salary
+FROM teachers
+WHERE school LIKE '%Roos%'
+ORDER BY hire_date DESC;
+
+--to create an excel output
+CREATE TABLE students (
+	first_name varchar(20),
+    last_name varchar(50),
+    reportcard_comments text
+);
+
+INSERT INTO students
+VALUES
+	('Helana', 'Nosrat', 'Social butterfly but very chatty during class.'),
+    ('Ryan', 'Belcher', 'Very talented musically, is excelling in music class.');
+    
+COPY students TO '/Users/helananosrat/workspace/SQL/SQL/postgres/students.txt'
+WITH (FORMAT CSV, HEADER, DELIMITER '|');
+
+--numeric data types
+CREATE TABLE emotions (
+	emotional_score numeric(20,5),
+    avg_emotional_score real,
+    precise_emotional_score double precision
+);
+
+INSERT INTO emotions
+VALUES
+	(.7, .7, .7),
+    (2.13579, 3.13573, 5.13576),
+    (2.1357987654, 2.1357987654, 2.1357987654);
+    
+SELECT * FROM emotions;
+
